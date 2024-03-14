@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { loginAPI, registerAPI, logoutAPI } from './AuthApi';
+import { loginAPI, registerAPI } from './AuthApi';
 
 const initialState = {
   isAuthenticated: false,
@@ -29,13 +29,32 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.user = null;
     },
+    registerStart(state) {
+      state.loading = true;
+      state.error = null;
+    },
+    registerSuccess(state, action) {
+      state.loading = false;
+      state.isAuthenticated = true;
+      state.user = action.payload;
+    },
+    registerFailure(state, action) {
+      state.loading = false;
+      state.error = action.payload;
+    },
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
-  authSlice.actions;
+export const {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+  logout,
+  registerStart,
+  registerSuccess,
+  registerFailure,
+} = authSlice.actions;
 
-// Exemplu de utilizare a funcției loginAPI în acțiunea loginStart
 export const loginUser = credentials => async dispatch => {
   try {
     dispatch(loginStart());
@@ -46,4 +65,15 @@ export const loginUser = credentials => async dispatch => {
   }
 };
 
-export default authSlice.reducer;
+export const registerUser = userData => async dispatch => {
+  try {
+    dispatch(registerStart());
+    const response = await registerAPI(userData);
+    dispatch(registerSuccess(response.user));
+  } catch (error) {
+    dispatch(registerFailure(error.message));
+  }
+};
+
+const authReducer = authSlice.reducer;
+export default authReducer;

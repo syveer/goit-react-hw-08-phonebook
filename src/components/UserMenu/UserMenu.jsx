@@ -1,21 +1,24 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { logout } from '../redux/Store/AuthSlice/authSlice'; // Importați acțiunea logout
+import { useSelector } from 'react-redux';
+import { useAuth } from '../../redux/Store/Context/AuthContext';
+import {
+  selectUser,
+  selectFilteredTutors,
+} from '../../redux/selectors/selectors';
 
-function UserMenu({ userEmail }) {
-  const dispatch = useDispatch();
-
-  const handleLogout = () => {
-    // Dispatchați acțiunea de logout pentru a reseta starea de autentificare
-    dispatch(logout());
-    // Aici puteți adăuga orice altă logică pentru a șterge token-ul sau datele de sesiune din backend
-  };
+function UserMenu() {
+  const { user, logout } = useAuth();
+  const userData = useSelector(selectUser);
+  const filteredTutors = useSelector(selectFilteredTutors);
 
   return (
     <div>
-      <p>{userEmail}</p> {/* Afiseazați emailul utilizatorului */}
-      <button onClick={handleLogout}>Logout</button>{' '}
-      {/* Adăugați butonul de logout */}
+      <p>{user.email}</p>
+      <p>
+        {userData.firstName} {userData.lastName}
+      </p>
+      {/* Afisăm numele și prenumele utilizatorului */}
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }
