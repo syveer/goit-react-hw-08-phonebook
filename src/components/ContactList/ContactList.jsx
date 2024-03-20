@@ -1,58 +1,62 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteContact } from '../../redux/Store/ContactSlice/ContactSlice';
-import styles from './ContactList.module.css';
+import { Loader } from '../Loader/Loader';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useContacts } from '../hooks/hooks';
+import { contactsOperations } from '../../redux/contacts/ContactsOperations';
+import { deleteToast } from '../Toasts';
+import { useSelector } from 'react-redux';
+import authSelectors from '../../redux/auth/auth-selectors';
 
-function ContactList() {
-  const [searchTerm, setSearchTerm] = useState('');
-  const contacts = useSelector(state => state.contacts.items);
-  const isLoading = useSelector(state => state.contacts.isLoading);
-  const error = useSelector(state => state.contacts.error);
+export const ContactsList = () => {
+  const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+
   const dispatch = useDispatch();
+  const { contacts, isLoaging, filter, deleteContact, setFilter } =
+    useContacts();
 
-  const handleDeleteContact = contactId => {
-    dispatch(deleteContact(contactId));
+  useEffect(() => {
+    dispatch(contactsOperations.getContacts());
+  }, [dispatch]);
+
+  const findContacts = () => {
+    const normalizedFilter = filter.toLowerCase();
+
+    if (contacts) {
+      return contacts.filter(contact =>
+        contact.name.toLowerCase().includes(normalizedFilter)
+      );
+    }
   };
 
-  const filteredContacts = contacts.filter(contact => {
-    return contact.name.toLowerCase().includes(searchTerm.toLowerCase());
-  });
-
-  const handleSearchChange = event => {
-    setSearchTerm(event.target.value);
-  };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  const filteredContacts = findContacts();
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>Contact List</h2>
-      <input
-        type="text"
-        placeholder="Search contacts"
-        value={searchTerm}
-        onChange={handleSearchChange}
-        className={styles.searchInput}
-      />
-      <ul className={styles.contactList}>
-        {filteredContacts.map(contact => (
-          <li key={contact.id} className={styles.contactItem}>
-            <strong className={styles.contactName}>{contact.name}</strong>:
-            <span className={styles.contactPhone}>{contact.phone}</span>
-            <button onClick={() => handleDeleteContact(contact.id)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+    <div>
+      {isLoaging && <Loader />}
+      {isLoggedIn && (
+        <ul className={style.items__container}>
+          {contacts &&
+            filteredContacts.map(({ id, name, number }) => {
+              return (
+                <li className={style.item} key={id}>
+                  <h3 className={style.item__name}>{name}:</h3>
+                  <p className={style.item__name}>{number}</p>
+                  <button
+                    className={style.user__btn}
+                    type="button"
+                    onClick={() => {
+                      deleteContact(id);
+                      deleteToast(`${name} tel:${number} is deleted`);
+                      setFilter('');
+                    }}
+                  >
+                    Delete
+                  </button>
+                </li>
+              );
+            })}
+        </ul>
+      )}
     </div>
   );
-}
-
-export default ContactList;
+};

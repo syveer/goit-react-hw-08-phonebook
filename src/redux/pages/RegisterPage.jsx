@@ -1,64 +1,72 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
-import { useAuth } from '../Store/Context/AuthContext';
+import style from '../../styles.module.css';
+import { useState } from 'react';
+import authOperations from '../auth/auth-operations';
+import { useDispatch } from 'react-redux';
 
-function RegisterPage() {
-  const navigate = useNavigate();
-  const { register } = useAuth();
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  });
+const Register = () => {
+  const dispatch = useDispatch();
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    try {
-      const response = await fetch('/signup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-      if (!response.ok) {
-        throw new Error('Failed to register');
-      }
-
-      const userData = await response.json();
-      register(userData);
-      navigate('/login');
-    } catch (error) {
-      console.error('Registration failed:', error);
+  const handleChange = event => {
+    const { name, value } = event.target;
+    switch (name) {
+      case 'name':
+        setName(value);
+        break;
+      case 'email':
+        setEmail(value);
+        break;
+      case 'password':
+        setPassword(value);
+        break;
+      default:
+        break;
     }
   };
 
-  const handleChange = e => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+  const handleSubmit = event => {
+    event.preventDefault();
+    dispatch(authOperations.register({ name, email, password }));
+
+    setName('');
+    setEmail('');
+    setPassword('');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-      <input
-        type="password"
-        name="password"
-        value={formData.password}
-        onChange={handleChange}
-        placeholder="Password"
-      />
-      <button type="submit">Register</button>
-    </form>
+    <div className={style.view__container}>
+      <h2 className={style.home__title}>Registration</h2>
+      <form className={style.form__container} onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          value={name}
+          placeholder="Name"
+          onChange={handleChange}
+        />
+        <input
+          type="email"
+          name="email"
+          value={email}
+          placeholder="example@email.com"
+          onChange={handleChange}
+        />
+        <input
+          type="password"
+          name="password"
+          value={password}
+          placeholder="password"
+          onChange={handleChange}
+        />
+        <button type="submit " className={style.form__btn}>
+          Registration
+        </button>
+      </form>
+    </div>
   );
-}
+};
 
-export default RegisterPage;
+export default Register;
