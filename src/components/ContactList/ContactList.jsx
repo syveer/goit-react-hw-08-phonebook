@@ -2,7 +2,7 @@ import { Loader } from '../Loader/Loader';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useContacts } from '../hooks/hooks';
-import { contactsOperations } from '../../redux/contacts/ContactsOperations';
+import { contactsOperations } from '../../redux/contacts/contactsOperations';
 import { deleteToast } from '../Toasts';
 import { useSelector } from 'react-redux';
 import authSelectors from '../../redux/auth/auth-selectors';
