@@ -12,9 +12,9 @@ import PublicRoute from './Routes/PublicRoutes';
 import { Layout } from './Layout';
 
 const HomeView = lazy(() => import('../redux/pages/Home'));
-const Register = lazy(() => import('../redux/pages/RegisterPage'));
-const Login = lazy(() => import('../redux/pages/LoginPage'));
-const Contacts = lazy(() => import('../redux/pages/ContactsPage'));
+const Register = lazy(() => import('../redux/pages/Register'));
+const Login = lazy(() => import('../redux/pages/Login'));
+const Contacts = lazy(() => import('../redux/pages/Contacts'));
 const NotFound = lazy(() => import('../redux/pages/NotFound'));
 
 export const App = () => {

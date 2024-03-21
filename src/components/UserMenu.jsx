@@ -11,7 +11,7 @@ export default function UserMenu() {
     <div className={style.user__container}>
       <p className={style.user__link}>Welcome, </p>
       <p className={style.user__name}>{name} </p>
-      <p className={style.user__smile}>😃</p>
+
       <button
         className={style.user__btn}
         type="submit"

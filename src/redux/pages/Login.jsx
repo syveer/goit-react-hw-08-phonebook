@@ -1,6 +1,6 @@
 import style from '../../styles.module.css';
 import { useState } from 'react';
-import authOperations from '../../redux/auth/auth-operations';
+import authOperations from '../auth/auth-operations';
 import { useDispatch } from 'react-redux';
 
 const Login = () => {

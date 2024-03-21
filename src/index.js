@@ -1,23 +1,23 @@
 import React from 'react';
-import 'react-toastify/dist/ReactToastify.css';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { PersistGate } from 'redux-persist/integration/react';
+import ReactDOM from 'react-dom/client';
+import { HashRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { persistor } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 import { store } from './redux/store';
+import { persistor } from './redux/store';
+
 import { App } from './components/App';
 import './index.css';
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <BrowserRouter basename="/goit-react-hw-08-phonebook/">
+        {/* BrowserRouter in this configuration does not work on GitHub hosting itself - not the same situation, locally - it works */}
+        <HashRouter>
           <App />
-        </BrowserRouter>
+        </HashRouter>
       </PersistGate>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
