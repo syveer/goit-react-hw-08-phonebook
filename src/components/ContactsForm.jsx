@@ -1,9 +1,7 @@
-import style from '../styles.module.css';
-
 import { useState } from 'react';
 import { useContacts } from './hooks/hooks';
-import { infoToast, successToast } from './Toasts';
-
+import { successToast, infoToast } from './Toasts';
+import style from '../styles.module.css';
 export const ContactsForm = () => {
   const { contacts, addContact } = useContacts();
 
@@ -64,7 +62,9 @@ export const ContactsForm = () => {
           required
           onChange={handleChange}
         />
-        <button type="submit " className={style.form__btn}>
+        <button type="submit" className={style.form__btn}>
+          {' '}
+          {/* Removed extra space after "submit" */}
           Add contact
         </button>
       </form>

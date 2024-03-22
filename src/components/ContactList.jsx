@@ -10,9 +10,8 @@ import style from '../styles.module.css';
 
 export const ContactsList = () => {
   const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
-
   const dispatch = useDispatch();
-  const { contacts, isLoaging, filter, deleteContact, setFilter } =
+  const { contacts, isLoading, filter, deleteContact, setFilter } =
     useContacts();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ export const ContactsList = () => {
 
   return (
     <div>
-      {isLoaging && <Loader />}
+      {isLoading && <Loader />}
       {isLoggedIn && (
         <ul className={style.items__container}>
           {contacts &&
@@ -47,7 +46,7 @@ export const ContactsList = () => {
                     type="button"
                     onClick={() => {
                       deleteContact(id);
-                      deleteToast(`${name} tel:${number} is deleted`);
+                      deleteToast(`${name} tel:${number} is deleted`); // Afișează mesajul de ștergere
                       setFilter('');
                     }}
                   >

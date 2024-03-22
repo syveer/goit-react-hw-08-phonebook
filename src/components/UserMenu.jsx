@@ -9,9 +9,10 @@ export default function UserMenu() {
 
   return (
     <div className={style.user__container}>
-      <p className={style.user__link}>Welcome, </p>
-      <p className={style.user__name}>{name} </p>
-
+      <div className={style.user__info}>
+        <p className={style.user__link}>Welcome,</p>
+        <p className={style.user__name}>{name}</p>
+      </div>
       <button
         className={style.user__btn}
         type="submit"
