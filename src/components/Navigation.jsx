@@ -15,9 +15,7 @@ const Navigation = () => {
             isActive ? style.active : style.nav__link
           }
           to="/contacts"
-        >
-          Contacts
-        </NavLink>
+        ></NavLink>
       ) : (
         <NavLink
           className={({ isActive }) =>
