@@ -1,5 +1,4 @@
 body {
-  margin: 20px;
   display: flex;
   justify-content: center;
 }
@@ -41,13 +40,14 @@ body {
   background-color: rgb(93, 103, 124);
   padding: 30px var(--glob-padding);
   box-shadow: 0px 1px 7px 0px rgb(0 0 0 / 75%);
+  height: 250px;
 }
 .nav__link {
   margin-top: 20px;
   font-weight: 700;
   font-size: 1.25rem;
   transition-duration: 800ms;
-  color: #4d4c4c;
+  color: #080808;
   margin-right: 1rem;
 }
 
@@ -63,14 +63,14 @@ body {
 
 .user__info {
   display: flex;
-  flex-direction: column; /* Direcția coloanei pentru elementele din interior */
-  align-items: flex-start; /* Alinierea pe stânga pe axa orizontală */
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .user__link {
   font-weight: 700;
   font-size: 1rem;
-  margin-bottom: 0.5rem; /* Spațiu între elementele de legătură și nume */
+  margin-bottom: 0.5rem;
 }
 
 .user__name {
@@ -78,7 +78,7 @@ body {
   font-size: 35px;
   text-shadow: 0px 2px 1px rgb(107 84 102);
   transition-duration: 800ms;
-  color: #e1ecf7;
+  color: #fdffff;
   margin-right: 20px;
 }
 
@@ -100,8 +100,10 @@ body {
 .user__name:hover,
 .active {
   margin-left: 25px;
+  margin-top: 20px;
   padding-top: 20px;
-  color: #e0dcdc;
+  color: #2e2d2d;
+  text-decoration: none;
 }
 
 .user__link,
@@ -146,6 +148,7 @@ body {
   font-size: 30px;
   transition-duration: var(--transition__duration);
   color: #e1ecf7;
+  margin-top: 20px;
 }
 .home__linc:hover,
 .active {
@@ -175,7 +178,7 @@ input {
   border: transparent;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
-  color: #6c757d;
+
   padding: 0.5rem;
   transition: 800ms;
   margin-left: 20px;
@@ -207,29 +210,9 @@ input:focus {
   color: #6c757d;
 }
 
-.success__toast {
-  background-color: #5cb85c;
-  color: #fff;
-  border-radius: 10px;
-  padding: 15px;
-}
-
-.info__toast {
-  background-color: #5bc0de;
-  color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-}
-
-.delete__toast {
-  background-color: #d9534f;
-  color: #fff;
-  border-radius: 10px;
-  padding: 1rem;
-}
 @media screen and (max-width: 768px) {
   .user__container {
-    margin: 1rem; /* Reducem margin-ul pentru ecranele mai mici */
+    margin: 1rem;
   }
 
   .view__container {
@@ -242,54 +225,54 @@ input:focus {
   }
 
   .nav__link {
-    font-size: 1rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
-    margin-right: 0.5rem; /* Reducem margin-ul pentru ecranele mai mici */
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
 
   .user__name {
-    font-size: 1.25rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
+    font-size: 1.25rem;
   }
 
   .user__link {
-    font-size: 1rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
-    margin-right: 0.5rem; /* Reducem margin-ul pentru ecranele mai mici */
+    font-size: 1rem;
+    margin-right: 0.5rem;
   }
 
   .user__btn,
   .form__btn {
-    font-size: 0.875rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
-    margin-left: 0.5rem; /* Reducem margin-ul pentru ecranele mai mici */
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
   }
 
   .home__linc {
-    margin-left: 0.5rem; /* Reducem margin-ul pentru ecranele mai mici */
-    font-size: 1rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
+    margin-left: 0.5rem;
+    font-size: 1rem;
   }
 
   .please {
-    font-size: 0.875rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
+    font-size: 0.875rem;
   }
 
   input {
-    font-size: 0.875rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
-    padding: 0.25rem; /* Reducem padding-ul pentru ecranele mai mici */
+    font-size: 0.875rem;
+    padding: 0.25rem;
   }
 
   .items {
-    gap: 0.5rem; /* Modificăm gap-ul pentru ecranele mai mici */
+    gap: 0.5rem;
   }
 
   .item {
-    height: 3rem; /* Modificăm înălțimea pentru ecranele mai mici */
+    height: 3rem;
   }
 
   .item__name {
-    font-size: 0.875rem; /* Modificăm dimensiunea fontului pentru ecranele mai mici */
+    font-size: 0.875rem;
   }
 
   .success__toast,
   .info__toast,
   .delete__toast {
-    padding: 0.75rem; /* Reducem padding-ul pentru ecranele mai mici */
+    padding: 0.75rem;
   }
 }
