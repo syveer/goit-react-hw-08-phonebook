@@ -32,7 +32,7 @@ const Login = () => {
 
   return (
     <div className={style.view__container}>
-      <h2 className={style.home__title}>Log in form</h2>
+      <h2 className={style.home__title}>Log in</h2>
       <form className={style.form__container} onSubmit={handleSubmit}>
         <input
           type="email"
